@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="CarRentalContext.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -159,6 +160,8 @@
     <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\EditModelViewModel.cs" />
+    <Compile Include="ViewModels\ManageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\bootstrap-select.min.css" />
@@ -328,6 +331,8 @@
     <Content Include="Views\Admin\AddModel.cshtml" />
     <Content Include="Views\Home\All.cshtml" />
     <Content Include="Views\Home\ViewDetails.cshtml" />
+    <Content Include="Views\Home\SearchResults.cshtml" />
+    <Content Include="Views\Admin\EditModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

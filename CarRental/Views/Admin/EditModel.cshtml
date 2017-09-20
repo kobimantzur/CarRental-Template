@@ -1,0 +1,68 @@
+﻿@using CarRental.Models
+@{
+    ViewBag.Title = "Edit Car No." + Model.Model.ID;
+}
+@using CarRental.ViewModels
+@model EditModelViewModel
+
+<div class="wheel-register-block">
+    <img src="images/bg1.jpg" alt="" class="wheel-img">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 padd-r0">
+                <div class="wheel-register-sign marg-lg-t150 marg-lg-b150 marg-sm-t100 marg-sm-b100 wheel-start-form">
+                    <div class="wheel-header">
+                        <h3>Edit <span>Model</span></h3>
+                    </div>
+                    <form action="/Admin/EditModel" method="post">
+                        <input type="tel" name="id" id="id" value="@Model.Model.ID"/>
+                        <input type="text" name="name" id="name" placeholder="Name" value="@Model.Model.Name">
+                        <div class="wheel-date">
+                            <span>Manufacture</span>
+                            <select class="selectpicker" name="manufactureId" id="manufactureId">
+                                @if (Model != null)
+                                {
+                                    foreach (Manufacture m in Model.ManufacturesList)
+                                    {
+                                        if (m.ID == Model.Model.ManufactureId)
+                                        {
+                                            <option value="@m.ID" selected="selected">@m.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@m.ID">@m.Name</option>
+
+                                        }
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <input type="url" name="image" id="image" placeholder="Image Url" value="@Model.Model.Image">
+                        <input name="color" id="color" type="text" placeholder="Color" value="@Model.Model.Color">
+                        <input name="pricePerDay" id="pricePerDay" type="number" placeholder="Price Per Day" value="@Model.Model.PricePerDay">
+                        <div class="wheel-date">
+                            <span>Year</span>
+                            <select class="selectpicker" name="year" id="year" >
+                                @for (int i = 2017; i > 1990; i--)
+                                {
+                                    if (Model.Model.Year == i)
+                                    {
+                                        <option value="@i" selected="selected">@i</option>
+
+                                    }
+                                    else
+                                    {
+                                        <option value="@i">@i</option>
+
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <button class="wheel-btn btn">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

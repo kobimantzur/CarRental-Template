@@ -13,6 +13,11 @@ namespace CarRental
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            Database.SetInitializer<CarRentalContext>(null);
+            base.OnModelCreating(modelBuilder);
+        }
         public DbSet<Manufacture> Manufacture { get; set; }
 
         public DbSet<Model> Model { get; set; }

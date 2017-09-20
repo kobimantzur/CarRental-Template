@@ -1,52 +1,65 @@
-﻿
-
-<div class="wheel-register-block">
+﻿@using CarRental.ViewModels
+@using CarRental.Models
+@model ManageViewModel
+<div class="wheel-start3 style-5">
+    <img src="images/z-bg-11.jpg" alt="" class="wheel-img">
     <div class="container">
         <div class="row">
-            <div class="col-md-5 padd-l0">
-                <div class="wheel-register-log marg-lg-t150 marg-lg-b150 marg-sm-t100 marg-sm-b100">
-                    <div class="wheel-header">
-                        <h5>have an account? Log In</h5>
-                    </div>
-                    <form action="#">
-                        <label for="userName" class="fa fa-user"><input type="text" id="userName" placeholder='Username / Email'></label>
-                        <label for="userPass" class="fa fa-lock"><input type="text" id='userPass' placeholder='Passsword'></label>
-                        <button class="wheel-btn">Login Now</button>
-                        <label class="password-sing clearfix" for="input-val2">
-                            <input type='checkbox' id='input-val2'> <span>Keep me signed in</span>
-                            <a href="">Forgot password?</a>
-                        </label>
-                    </form>
-                    <div class="wheel-register-link">
-                        <a href="" class="wheel-btn-link wheel-bg11">Sign in With Facebook</a>
-                        <a href="" class="wheel-btn-link wheel-bg12">Sign in With Twitter</a>
-                    </div>
-                </div>
+            <div class="wheel-start3-body clearfix marg-lg-t255 marg-lg-b75 marg-sm-t190 marg-xs-b30">
+                <h2>Manufactures</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Manufacture item in Model.ManufacturesList)
+            {
+                            <tr>
+                                <td>@item.ID</td>
+                                <td class="manufacture-name">@item.Name</td>
+                                <td><span class="edit-btn">Edit</span></td>
+                                <td><a href="/Admin/DeleteManufacture?ID=@item.ID">Delete</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
-            <div class="col-md-7 padd-r0">
-                <div class="wheel-register-sign marg-lg-t150 marg-lg-b150 marg-sm-t100 marg-sm-b100">
-                    <div class="wheel-header">
-                        <h5>Sign up Now </h5>
-                        <h3>Get <span>Registered</span></h3>
-                    </div>
-                    <form action="#">
-                        <input type="text" placeholder="First Name">
-                        <input type="text" placeholder="Last Name">
-                        <input type="text" placeholder="Email">
-                        <input type="text" placeholder="Username">
-                        <input type="text" placeholder="Password">
-                        <input type="text" placeholder="Confirm Password">
-                        <label for="input-val1">
-                            <input type="checkbox" id='input-val1'> <span>I agree with the </span>
-                            <a href="">Terms and Conditions</a>
-                        </label>
-                        <button class="wheel-btn">Sign Up</button>
-                    </form>
-                    <div class="wheel-register-link">
-                        <a href="" class="wheel-btn-link wheel-bg11">Register With Facebook</a>
-                        <a href="" class="wheel-btn-link wheel-bg12">Register With Twitter</a>
-                    </div>
-                </div>
+            <!--Models-->
+            <div class="wheel-start3-body clearfix marg-lg-t255 marg-lg-b75 marg-sm-t190 marg-xs-b30">
+                <h2>Models</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Model</th>
+                            <th>ManufactureID</th>
+                            <th>Year</th>
+                            <th>Color</th>
+                            <th>Price Per Day</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (Model item in Model.ModelsList)
+            {
+                            <tr>
+                                <td>@item.ID</td>
+                                <td class="manufacture-name">@item.Name</td>
+                                <td>@item.ManufactureId</td>
+                                <td>@item.Year</td>
+                                <td>@item.Color</td>
+                                <td>@item.PricePerDay</td>
+                                <td><a href="/Admin/EditModel?ID=@item.ID">Edit</a></td>
+                                <td><a href="/Admin/DeleteModel?ID=@item.ID">Delete</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

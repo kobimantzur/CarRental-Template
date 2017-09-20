@@ -1,4 +1,5 @@
 ﻿using CarRental.Models;
+using CarRental.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +41,10 @@ namespace CarRental.Controllers
         public ActionResult AddModel()
         {
             List<Manufacture> manufacturesList = new List<Manufacture>();
-            manufacturesList = dbContext.Manufacture.OrderBy(x => x.Name).ToList();
+            if (dbContext.Manufacture.Count() > 0)
+            {
+                manufacturesList = dbContext.Manufacture.OrderBy(x => x.Name).ToList();
+            }
             return View(manufacturesList);
         }
         [HttpPost]
@@ -52,7 +56,7 @@ namespace CarRental.Controllers
                 dbContext.Model.Add(m);
                 dbContext.SaveChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 RedirectToAction("Index", "Home");
             }
@@ -60,8 +64,11 @@ namespace CarRental.Controllers
         }
         public ActionResult Manage()
         {
+            ManageViewModel vm = new ManageViewModel();
+            vm.ModelsList = dbContext.Model.ToList();
+            vm.ManufacturesList = dbContext.Manufacture.ToList();
 
-            return View();
+            return View(vm);
         }
         public ActionResult Statistics()
         {
@@ -69,6 +76,87 @@ namespace CarRental.Controllers
             return View();
         }
 
+        public ActionResult DeleteManufacture(int ID)
+        {
+            try
+            {
+                Manufacture m = dbContext.Manufacture.Where(x => x.ID == ID).FirstOrDefault();
+                List<Model> models = dbContext.Model.Where(x => x.ManufactureId == ID).ToList();
+                foreach (Model item in models)
+                {
+                    dbContext.Model.Remove(item);
+
+                }
+                dbContext.Manufacture.Remove(m);
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Manage", "Admin");
+        }
+
+        [HttpGet]
+        public ActionResult DeleteModel(int ID)
+        {
+            try
+            {
+                Model m = dbContext.Model.Where(x => x.ID == ID).FirstOrDefault();
+                dbContext.Model.Remove(m);
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Manage", "Admin");
+        }
+        [HttpGet]
+        public ActionResult UpdateManufacture(int ID, string Name)
+        {
+            try
+            {
+                Manufacture m = dbContext.Manufacture.Where(x => x.ID == ID).FirstOrDefault();
+                m.Name = Name;
+                dbContext.Entry(m).State = System.Data.Entity.EntityState.Modified;
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Manage", "Admin");
+        }
+
+        public ActionResult EditModel(int ID)
+        {
+            EditModelViewModel vm = new EditModelViewModel();
+            try
+            {
+                vm.Model = dbContext.Model.Where(x => x.ID == ID).FirstOrDefault();
+                vm.ManufacturesList = dbContext.Manufacture.OrderBy(x => x.Name).ToList();
+            }
+            catch (Exception ex)
+            {
+                RedirectToAction("Index", "Home");
+            }
+            return View(vm);
+        }
+        [HttpPost]
+        public ActionResult EditModel(Model m)
+        {
+            try
+            {
+                dbContext.Entry(m).State = System.Data.Entity.EntityState.Modified;
+                dbContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Manage", "Admin");
+        }
 
     }
 }
