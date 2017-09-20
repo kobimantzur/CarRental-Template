@@ -1,6 +1,9 @@
 ﻿@{ 
     ViewBag.Title = "Home";
 }
+@using  CarRental.Models
+@using CarRental.ViewModels
+@model HomePageViewModel
 <div class="wheel-start">
     <img src="images/bg1.jpg" alt="" class="wheel-img">
     <div class="container padd-lr0">
@@ -14,37 +17,17 @@
         <div class="col-lg-6 col-lg-pull-6  padd-lr0">
             <div class="wheel-start-form">
                 <form action="#">
-                    <label for="input-val11">
-                        <span>Dropping Off</span>
-                        <input type="text" id='input-val11' placeholder="ZIP, City, Airport or Address" required>
-                    </label>
-                    <label for="input-val12">
-                        <span>Picking Up</span>
-                        <input type="text" id='input-val12' placeholder="ZIP, City, Airport or Address" required>
-                    </label>
                     <div class="clearfix">
                         <div class="wheel-date">
                             <span>Pickup Date</span>
                             <label for="input-val13" class="fa fa-calendar">
-                                <input class="datetimepicker" id='input-val13' type="text" value="29 Apr">
-                            </label>
-                        </div>
-                        <div class="wheel-date ">
-                            <span>Pickup time</span>
-                            <label for="input-val14" class="fa fa-clock-o">
-                                <input class="timepicker" id='input-val14' type="text" value="18:00">
+                                <input class="datetimepicker" id='input-val13' type="text" value="29 Apr" name="pickupDate" >
                             </label>
                         </div>
                         <div class="wheel-date">
                             <span>Return Date</span>
                             <label for="input-val15" class="fa fa-calendar">
-                                <input class="datetimepicker" id='input-val15' type="text" value="29 Apr">
-                            </label>
-                        </div>
-                        <div class="wheel-date">
-                            <span>Return Time</span>
-                            <label for="input-val16" class="fa fa-clock-o">
-                                <input class="timepicker" id='input-val16' type="text" value="18:00">
+                                <input class="datetimepicker" id='input-val15' type="date" value="29 Apr" name="returnDate">
                             </label>
                         </div>
                         <div class="wheel-date">
@@ -83,15 +66,12 @@
                             </select>
                         </div>
                         <div class="wheel-date">
-                            <span>Resident</span>
-                            <select class="selectpicker">
-                                <option>USA</option>
-                                <option>UA</option>
-                                <option>UK</option>
-                                <option>AU</option>
-                                <option>LT</option>
-                                <option>JP</option>
-                                <option>IT</option>
+                            <span>Manufacture</span>
+                            <select class="selectpicker" id="manufactureId" name="manufactureId">
+                                @foreach (Manufacture item in Model.ManufacturesList)
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+                                }
                             </select>
                         </div>
                     </div>

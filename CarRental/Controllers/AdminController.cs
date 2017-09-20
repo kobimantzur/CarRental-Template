@@ -158,5 +158,10 @@ namespace CarRental.Controllers
             return RedirectToAction("Manage", "Admin");
         }
 
+        [HttpGet]
+        public ActionResult Search(DateTime PickupDate,DateTime endDate)
+        {
+            return View();
+        }
     }
 }

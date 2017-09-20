@@ -1,4 +1,5 @@
 ﻿using CarRental.Models;
+using CarRental.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,10 @@ namespace CarRental.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            HomePageViewModel vm = new HomePageViewModel();
+            vm.ManufacturesList = dbContext.Manufacture.OrderBy(x => x.Name).ToList();
+
+            return View(vm);
         }
 
         public ActionResult All()
@@ -46,8 +50,8 @@ namespace CarRental.Controllers
 
         public ActionResult ViewDetails(int ID)
         {
-            try { 
-            Model model = dbContext.Model.Where(x => x.ID == ID).FirstOrDefault();
+            try {
+                Model model = dbContext.Model.Where(x => x.ID == ID).FirstOrDefault();
                 AllViewModel vm = new AllViewModel();
                 vm.ID = model.ID;
                 vm.Name = model.Name;
@@ -59,11 +63,17 @@ namespace CarRental.Controllers
                 vm.ManufactureName = dbContext.Manufacture.Where(x => x.ID == model.ManufactureId).FirstOrDefault().Name;
                 return View(vm);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult SearchResults(DateTime PickupDate, DateTime EndDate)
+        {
+            List<Model> models = new List<Model>();
+            return View();
         }
     }
 }
