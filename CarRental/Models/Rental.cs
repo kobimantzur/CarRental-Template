@@ -14,8 +14,8 @@ namespace CarRental.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public int ModelID { get; set; }
-        public DateTime StartDate { get; set; }
-        public int EndDate { get; set; }
+        public DateTime PickupDate { get; set; }
+        public DateTime ReturnDate { get; set; }
         public string Color { get; set; }
         public int DriverAge { get; set; }
 

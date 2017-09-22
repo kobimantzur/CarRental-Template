@@ -16,19 +16,15 @@
         </div>
         <div class="col-lg-6 col-lg-pull-6  padd-lr0">
             <div class="wheel-start-form">
-                <form action="#">
+                <form action="/Home/SearchResults">
                     <div class="clearfix">
                         <div class="wheel-date">
                             <span>Pickup Date</span>
-                            <label for="input-val13" class="fa fa-calendar">
-                                <input class="datetimepicker" id='input-val13' type="text" value="29 Apr" name="pickupDate" >
-                            </label>
+                                <input  class="date" id='pickupDate' type="text" name="pickupDate" >
                         </div>
                         <div class="wheel-date">
                             <span>Return Date</span>
-                            <label for="input-val15" class="fa fa-calendar">
-                                <input class="datetimepicker" id='input-val15' type="date" value="29 Apr" name="returnDate">
-                            </label>
+                                <input class="date" id='returnDate' type="text" value="" name="returnDate">
                         </div>
                         <div class="wheel-date">
                             <span>Driver’s Age</span>
@@ -68,11 +64,12 @@
                         <div class="wheel-date">
                             <span>Manufacture</span>
                             <select class="selectpicker" id="manufactureId" name="manufactureId">
+                                <option value="-1" selected="selected">Select</option>
                                 @foreach (Manufacture item in Model.ManufacturesList)
                                 {
                                     <option value="@item.ID">@item.Name</option>
                                 }
-                            </select>
+                                </select>
                         </div>
                     </div>
                     <label for="input-val17" class="promo">

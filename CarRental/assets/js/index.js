@@ -23,58 +23,29 @@
     "use strict";
 
 // time picker
-    if ($(".edit-btn").length>0) {
-        $(".edit-btn").on("click", function () {
-            if ($(this).hasClass("edit")) {
-                $(this).removeClass("edit");
-                var id = $(this).parent().prev().prev()[0].innerHTML;
-                var newName = $(this).parent().prev()[0];
-                newName = $(newName).children()[0];
-                newName = $(newName).val();
-                var url = window.location.origin + "/Admin/UpdateManufacture?ID=" + id + "&Name=" + newName;
-                window.location.href = url;
-            }
-            else {
-                $(this).addClass("edit");
-                  var txt = $(this).parent().prev()[0].innerText;
-            $(this).parent().prev()[0].innerHTML = "<input  type='text' value='" + txt + "' />";
-            $(this).text("save");
-            }
-        });
-    }
+
     if ($('.timepicker').length) {
         $('.timepicker').datetimepicker({
-            datepicker: false,
+            datepicker: true,
             format: 'H:i'
         });
     }
     if ($('.datetimepicker').length) {
 
 
-        $.datetimepicker.setLocale('de');
+        $.datetimepicker.setLocale('en');
 
-        $('.datetimepicker').datetimepicker({
-            i18n: {
-                de: {
-                    months: [
-                        'Januar', 'Februar', 'März', 'April',
-                        'Mai', 'Juni', 'Juli', 'August',
-                        'September', 'Oktober', 'November', 'Dezember',
-                    ],
-                    dayOfWeek: [
-                        "So.", "Mo", "Di", "Mi",
-                        "Do", "Fr", "Sa.",
-                    ]
-                }
-            },
-            timepicker: false,
+        //$('.datetimepicker').datetimepicker({
+           
+        //    timepicker: false,
 
-            format: 'd.m'
-        });
+        //    format: 'dd-mm-yyyy'
+        //});
     }
 
 
-
+    function search() {
+    }
 $('.wheel-table-cart .fa-times').on('click', function (e) {
    $(this).parent().parent().remove();
 });
@@ -680,5 +651,31 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
             videoSize();
         }
     });
+
+    if ($(".edit-btn").length > 0) {
+        $(".edit-btn").on("click", function () {
+            if ($(this).hasClass("edit")) {
+                $(this).removeClass("edit");
+                var id = $(this).parent().prev().prev()[0].innerHTML;
+                var newName = $(this).parent().prev()[0];
+                newName = $(newName).children()[0];
+                newName = $(newName).val();
+                var url = window.location.origin + "/Admin/UpdateManufacture?ID=" + id + "&Name=" + newName;
+                window.location.href = url;
+            }
+            else {
+                $(this).addClass("edit");
+                var txt = $(this).parent().prev()[0].innerText;
+                $(this).parent().prev()[0].innerHTML = "<input  type='text' value='" + txt + "' />";
+                $(this).text("save");
+            }
+        });
+    }
+
+    $('.date').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true
+    });
+
 
 })(jQuery, window, document);

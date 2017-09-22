@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="~/assets/css/css_reset.css">
     <!-- bootstrap -->
     <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" />
     <link rel="stylesheet" type="text/css" href="~/assets/css/jquery.datetimepicker.min.css">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="~/assets/css/bootstrap-select.min.css">
@@ -99,7 +100,7 @@
                             <!-- class="dl-menu" -->
                             <ul class="main-menu dl-menu">
                                 <li class="menu-item   current-menu-parent menu-item-has-children   active-color ">
-                                    <a href="#">Home</a>
+                                    <a href="/">Home</a>
                                 </li>
                                 <li class="menu-item">
                                     <a href="/Home/All">Our Cars</a>
@@ -122,7 +123,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="menu-item menu-item-has-children  ">
+                                <li class="menu-item menu-item-has-children" id="adminMenu">
                                     <a href="#">Admin</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item"><a href="/Admin/AddManufacture">Add Manufacture</a></li>
@@ -134,7 +135,11 @@
                             </ul>
                             <div class="nav-menu-icon"><i></i></div>
                         </nav>
-                        <a href="" class="wheel-cheader-but">Buy Now</a>
+                        <span id="loginBtn"  class="wheel-cheader-but" onclick="fbLogin()">Connect with Facebook</span>
+                        <div id="user" class="wheel-cheader-but user">
+                            <img src="#" width="50" />
+                            <h4></h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -232,6 +237,43 @@
         </div>
     </div>
     <!-- Scripts project -->
+    <script>
+  window.fbAsyncInit = function() {
+    FB.init({
+        appId: '2076889782535114',
+      autoLogAppEvents : true,
+        xfbml: true,
+      cookie: true,
+      version          : 'v2.10'
+    });
+        FB.AppEvents.logPageView();
+        FB.getLoginStatus(function (response) {
+            if (response.status === 'connected') {
+                FB.api('/me?fields=name,picture,email,first_name,last_name,link', function (response) {
+                    fbUserData = response;
+                    fbUserData["token"] = FB.getAccessToken();
+                    fbUserData["image"] = "http://graph.facebook.com/" + response.id + "/picture?type=normal";
+                    fbUserData["imageName"] = response.id + ".png";
+                    setLoginStatus(true);
+                });
+            }
+            else {
+                setLoginStatus(false);
+            }
+        });
+
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+    
     <script type="text/javascript" src="~/assets/js/jquery-2.2.4.min.js"></script>
     <script type="text/javascript" src="~/assets/js/bootstrap.min.js"></script>
     <!-- count -->
@@ -242,9 +284,11 @@
     <script type="text/javascript" src="~/assets/js/idangerous.swiper.min.js"></script>
     <script type="text/javascript" src="~/assets/js/equalHeightsPlugin.js"></script>
     <script type="text/javascript" src="~/assets/js/jquery.datetimepicker.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script type="text/javascript" src="~/assets/js/bootstrap-select.min.js"></script>
     <script type="text/javascript" src="~/assets/js/index.js"></script>
+    <script type="text/javascript" src="~/assets/js/main.js"></script>
     <!-- sixth block end -->
 </body>
 </html>

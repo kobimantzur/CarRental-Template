@@ -2,6 +2,7 @@
 using CarRental.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,22 +24,13 @@ namespace CarRental.Controllers
         public ActionResult All()
         {
             List<Model> modelsList = new List<Model>();
-            List<AllViewModel> vmList = new List<AllViewModel>();
             try
             {
                 modelsList = dbContext.Model.ToList();
-                foreach (var item in modelsList)
-                {
-                    AllViewModel vm = new AllViewModel();
-                    vm.ID = item.ID;
-                    vm.Name = item.Name;
-                    vm.Image = item.Image;
-                    vm.ManufactureId = item.ManufactureId;
-                    vm.Year = item.Year;
-                    vm.PricePerDay = item.PricePerDay;
-                    vm.ManufactureName = dbContext.Manufacture.Where(x => x.ID == item.ManufactureId).FirstOrDefault().Name;
-                    vmList.Add(vm);
-                }
+                var vmList = modelsList.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
+                manufacture => manufacture.ID,
+                (x, y) => new AllViewModel(x, y.FirstOrDefault()));
+              
                 return View(vmList);
             }
             catch (Exception ex)
@@ -70,10 +62,22 @@ namespace CarRental.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult SearchResults(DateTime PickupDate, DateTime EndDate)
+        public ActionResult SearchResults(string PickupDate, string ReturnDate,int ManufactureId = -1)
         {
-            List<Model> models = new List<Model>();
-            return View();
+            DateTime parsedPickupDate = DateTime.ParseExact(PickupDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            DateTime parsedReturnDate = DateTime.ParseExact(ReturnDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var models = new List<Model>();
+            models = dbContext.Model.Where(x => (dbContext.Rental.Where(y=> y.ModelID == x.ID && (parsedPickupDate >= y.PickupDate && parsedReturnDate <= y.ReturnDate )).ToList().Count == 0)).ToList();
+            if (ManufactureId != -1)
+            {
+                models = models.Where(x => x.ManufactureId == ManufactureId).ToList();
+            }
+            var vmList = models.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
+                manufacture => manufacture.ID,
+                (x, y) => new AllViewModel(x, y.FirstOrDefault()));
+
+            return View(vmList.ToList<AllViewModel>());
         }
+
     }
 }

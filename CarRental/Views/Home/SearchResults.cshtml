@@ -6,11 +6,7 @@
         <div class="row">
             <div class="col-xs-12 padd-lr0">
                 <div class="wheel-start3-body clearfix marg-lg-t255 marg-lg-b75 marg-sm-t190 marg-xs-b30">
-                    <h3>Our Cars</h3>
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Listing</li>
-                    </ol>
+                    <h3>Search Results</h3>
                 </div>
             </div>
         </div>
@@ -46,7 +42,7 @@
                                         
                                     </ul>
                                     <div class="wheel-view-link">
-                                        <a href="/Home/ViewDetails?ID=@m.ID">View Details</a>
+                                        <a href="/Home/ViewDetails?ID=@m.ID&pickupDate=@Request.QueryString["pickupDate"]&returnDate=Request.QueryString["returnDate"]">View Details</a>
                                     </div>
                                 </div>
                             </div>

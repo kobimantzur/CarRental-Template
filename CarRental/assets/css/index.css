@@ -618,9 +618,27 @@ h6 {
   position: relative;
   -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease; }
-  .wheel-cheader-but:hover {
-    background-color: #404040;
-    color: #fff; }
+    .wheel-cheader-but#loginBtn{
+        display:none;
+    } 
+    .wheel-cheader-but.user {
+        white-space: nowrap;
+    }
+        .wheel-cheader-but.user:hover {
+            background-color: #ff7043;
+        } 
+        .wheel-cheader-but.user img {
+            display: inline-block;
+            border-radius: 30px;
+            padding: 4px;
+        }
+        .wheel-cheader-but.user h4{
+            display:inline-block;
+        }
+    .wheel-cheader-but:hover {
+        background-color: #404040;
+        color: #fff;
+    }
   .wheel-cheader-but:before, .wheel-cheader-but:after {
     content: '';
     display: inline-block;
@@ -6368,4 +6386,8 @@ h6 {
     text-align: left;
     margin-bottom: 0;
   }
+}
+
+#adminMenu {
+    display:none;
 }
