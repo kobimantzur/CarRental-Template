@@ -68,7 +68,12 @@ namespace CarRental.Controllers
             ManageViewModel vm = new ManageViewModel();
             vm.ModelsList = dbContext.Model.ToList();
             vm.ManufacturesList = dbContext.Manufacture.ToList();
-
+            List<Rental> rentals = new List<Rental>();
+            rentals = dbContext.Rental.ToList();
+            vm.RentalsList = rentals.GroupJoin(dbContext.Model, 
+                rental => rental.CarID, 
+                model => model.ID, 
+                (x, y) => new RentalViewModel(x, y.FirstOrDefault())).ToList();
             return View(vm);
         }
         public ActionResult Statistics()

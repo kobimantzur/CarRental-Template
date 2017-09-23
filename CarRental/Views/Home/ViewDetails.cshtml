@@ -2,7 +2,8 @@
 @model AllViewModel
 
 <div class="wheel-start3 style-5">
-    <img src="images/z-bg-11.jpg" alt="" class="wheel-img">
+    <input type="text" hidden id="carId" value="@Model.ID" />
+    <img src="~/images/z-bg-11.jpg" alt="" class="wheel-img">
     <div class="container">
         <div class="row">
             <div class="col-xs-12 padd-lr0">
@@ -30,13 +31,15 @@
                         <div class="listing-hedlines t-center">
                             <h5 class="title">@Model.ManufactureName  @Model.Name   @Model.Year</h5>
                             <div class="subtitle">@Model.PricePerDay$ Per Day</div>
+                            <span id="rentBtn" class="wheel-cheader-but" onclick="rent()">Rent Now!</span>
+                            <span id="rentMessage">You rented this car.</span>
                         </div>
                     </div>
                 </div>
              
                 <div class="row marg-lg-t55 marg-sm-t0 marg-sm-b0 marg-lg-b75">
                     <div class="col-xs-12 marg-lg-b75 marg-sm-b0 padd-lr0">
-                        <div class="wheel-map style-1" data-lat="40.7143528" data-lng="-74.0059731" data-marker="images/marker.png" data-zoom="10" data-style="style-1" data-string="WPC string"></div>
+                        <div class="wheel-map style-1" data-lat="40.7143528" data-lng="-74.0059731" data-marker="/images/marker.png" data-zoom="10" data-style="style-1" data-string="WPC string"></div>
                     </div>
                 </div>
             </div>

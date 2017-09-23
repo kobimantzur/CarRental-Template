@@ -13,7 +13,7 @@ namespace CarRental.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Name { get; set; }
-        public int ModelID { get; set; }
+        public int CarID { get; set; }
         public DateTime PickupDate { get; set; }
         public DateTime ReturnDate { get; set; }
         public string Color { get; set; }

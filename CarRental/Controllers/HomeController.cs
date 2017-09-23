@@ -67,7 +67,7 @@ namespace CarRental.Controllers
             DateTime parsedPickupDate = DateTime.ParseExact(PickupDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DateTime parsedReturnDate = DateTime.ParseExact(ReturnDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             var models = new List<Model>();
-            models = dbContext.Model.Where(x => (dbContext.Rental.Where(y=> y.ModelID == x.ID && (parsedPickupDate >= y.PickupDate && parsedReturnDate <= y.ReturnDate )).ToList().Count == 0)).ToList();
+            models = dbContext.Model.Where(x => (dbContext.Rental.Where(y=> y.CarID == x.ID && (parsedPickupDate >= y.PickupDate && parsedReturnDate <= y.ReturnDate )).ToList().Count == 0)).ToList();
             if (ManufactureId != -1)
             {
                 models = models.Where(x => x.ManufactureId == ManufactureId).ToList();

@@ -1,22 +1,34 @@
 ﻿@using CarRental.ViewModels
 @using CarRental.Models
 @model ManageViewModel
-<div class="wheel-start3 style-5">
-    <img src="images/z-bg-11.jpg" alt="" class="wheel-img">
-    <div class="container">
-        <div class="row">
-            <div class="wheel-start3-body clearfix marg-lg-t255 marg-lg-b75 marg-sm-t190 marg-xs-b30">
-                <h2>Manufactures</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Manufacture item in Model.ManufacturesList)
+<div class="wheel-start3 style-5 manage">
+    <div class="">
+        <img src="~/images/z-bg-11.jpg" alt="" class="wheel-img">
+        <div class="container">
+            <div class="row">
+
+                <div class="wheel-start3-body clearfix marg-lg-t255 marg-lg-b75 marg-sm-t190 marg-xs-b30">
+                    <h2 class="manufactures">Manufactures</h2>
+                    <h2 class="models">Models</h2>
+                    <h2 class="orders">Rents</h2>
+
+                    <aside>
+                        <ul>
+                            <li onclick="manageContext(1)">Manufactures</li>
+                            <li onclick="manageContext(2)">Models</li>
+                            <li onclick="manageContext(3)">Order</li>
+                        </ul>
+                    </aside>
+                    <table class="table table-striped manufactures">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Manufacture item in Model.ManufacturesList)
             {
                             <tr>
                                 <td>@item.ID</td>
@@ -25,41 +37,69 @@
                                 <td><a href="/Admin/DeleteManufacture?ID=@item.ID">Delete</a></td>
                             </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
-            <!--Models-->
-            <div class="wheel-start3-body clearfix marg-lg-t255 marg-lg-b75 marg-sm-t190 marg-xs-b30">
-                <h2>Models</h2>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Model</th>
-                            <th>ManufactureID</th>
-                            <th>Year</th>
-                            <th>Color</th>
-                            <th>Price Per Day</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Model item in Model.ModelsList)
-            {
+                        </tbody>
+                    </table>
+                    <table class="table table-striped models">
+                        <thead>
                             <tr>
-                                <td>@item.ID</td>
-                                <td class="manufacture-name">@item.Name</td>
-                                <td>@item.ManufactureId</td>
-                                <td>@item.Year</td>
-                                <td>@item.Color</td>
-                                <td>@item.PricePerDay</td>
-                                <td><a href="/Admin/EditModel?ID=@item.ID">Edit</a></td>
-                                <td><a href="/Admin/DeleteModel?ID=@item.ID">Delete</a></td>
+                                <th>ID</th>
+                                <th>Model</th>
+                                <th>ManufactureID</th>
+                                <th>Year</th>
+                                <th>Color</th>
+                                <th>Price Per Day</th>
+                                <th></th>
+                                <th></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (Model item in Model.ModelsList)
+            {
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <td class="manufacture-name">@item.Name</td>
+                                    <td>@item.ManufactureId</td>
+                                    <td>@item.Year</td>
+                                    <td>@item.Color</td>
+                                    <td>@item.PricePerDay</td>
+                                    <td><a href="/Admin/EditModel?ID=@item.ID">Edit</a></td>
+                                    <td><a href="/Admin/DeleteModel?ID=@item.ID">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <table class="table table-striped orders">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>CarID</th>
+                                <th>Pickup Date</th>
+                                <th>Return Date</th>
+                                <th>Total Price</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (RentalViewModel item in Model.RentalsList)
+            {
+                                <tr>
+                                    <td>@item.ID</td>
+                                    <td class="manufacture-name">@item.Name</td>
+                                    <td>@item.CarID</td>
+                                    <td>@item.PickupDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.ReturnDate.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.PricePerDay</td>
+                                    <td><a href="/Admin/EditOrder?ID=@item.ID">Edit</a></td>
+                                    <td><a href="/Admin/DeleteOrder?ID=@item.ID">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+
             </div>
         </div>
     </div>

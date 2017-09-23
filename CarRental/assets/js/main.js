@@ -1,21 +1,26 @@
 ﻿var fbUserData, providerValidation, loginTries;
-//Facebook
-//window.fbAsyncInit = function () {
-//    FB.init({
-//        appId: '2076889782535114',
-//        status: true,
-//        cookie: true,
-//        xfbml: true
-//    });
-//};
+var rentedCars;
+
 $(document).ready(function () {
- 
+    if ($("#rentBtn").length > 0) {
+        rentedCars = sessionStorage.getItem("rentedCars");
+        if (rentedCars && rentedCars.length > 0) {
+            var carId = $("#carId").val();
+            for (var i = 0; i < rentedCars.length; i++) {
+                if (rentedCars[i] == carId) {
+                    $("#rentBtn").hide();
+                    $("#rentMessage").show();
+                    break;
+                }
+            }
+        }
+    }
 });
 if (!fbUserData) {
     setLoginStatus(false);
 }
 function fbLogin() {
-    if (fbUserData) { return;}
+    if (fbUserData) { return; }
     FB.login(function (response) {
         if (response.status != "unknown") {
             FB.api('/me?fields=name,picture,email,first_name,last_name,link', function (response) {
@@ -54,5 +59,81 @@ function setLoginStatus(state) {
     else {
         $("#loginBtn").show();
         $("#user").hide();
+    }
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function rent(carId) {
+    if (!carId) {
+        carId = $("#carId").val();
+    }
+    if (!fbUserData) {
+        alert("You must login in order to rent a car");
+    }
+    else {
+        var returnDate = getParameterByName("returnDate");
+        $.ajax({
+            type: "POST",
+            url: "/User/Rent",
+            data: {
+                pickupDate: getParameterByName("pickupDate"),
+                returnDate: getParameterByName("returnDate"),
+                userId: fbUserData.id,
+                carId: carId
+            },
+            dataType: "text",
+            success: function (data) {
+                if (data == "success") {
+                    $("#rentBtn").hide();
+                    $("#rentMessage").show();
+                    $("#rentModal").modal();
+                    rentedCars = sessionStorage.getItem("rentedCars");
+                    if (!rentedCars) {
+                        rentedCars = [];
+                        rentedCars.push($("#carId").val());
+                    }
+                    else {
+                        rentedCars.push($("#carId").val());
+                    }
+                    sessionStorage.setItem("rentedCars", $("#carId").val());
+                }
+            }
+        });
+    }
+}
+
+var c = document.getElementById("myCanvas");
+if (c) {
+    var ctx1 = c.getContext("2d");
+    ctx1.moveTo(0, 0);
+    ctx1.lineTo(200, 100);
+    ctx1.stroke();
+}
+function manageContext(id) {
+    switch (id) {
+        case 1:
+            $(".manufactures").show();
+            $(".models").hide();
+            $(".orders").hide();
+            break;
+        case 2:
+            $(".manufactures").hide();
+            $(".models").show();
+            $(".orders").hide();
+            break;
+        case 3:
+            $(".manufactures").hide();
+            $(".models").hide();
+            $(".orders").show();
+            break;
     }
 }

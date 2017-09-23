@@ -10,5 +10,6 @@ namespace CarRental.ViewModels
     {
         public List<Manufacture> ManufacturesList { get; set; }
         public List<Model> ModelsList { get; set; }
+        public List<RentalViewModel> RentalsList { get; set; }
     }
 }

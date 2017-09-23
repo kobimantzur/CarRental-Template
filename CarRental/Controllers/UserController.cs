@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,17 +21,17 @@ namespace CarRental.Controllers
         {
             return RedirectToAction("Index", "Home");
         }
-
+        [HttpPost]
         public ActionResult Rent()
         {
             Rental r = new Rental();
-            r.PickupDate = DateTime.Now;
-            r.ReturnDate = r.PickupDate.AddDays(5);
-            r.ModelID = 2;
+            r.PickupDate = DateTime.ParseExact(Request.Form["pickupDate"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            r.ReturnDate = DateTime.ParseExact(Request.Form["returnDate"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            r.CarID = int.Parse(Request.Form["CarID"]);
             r.DriverAge = 21;
             dbContext.Rental.Add(r);
             dbContext.SaveChanges();
-            return View();
+            return Content("success", "application/json");
         }
 
         [HttpGet]

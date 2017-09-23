@@ -6391,3 +6391,29 @@ h6 {
 #adminMenu {
     display:none;
 }
+#rentBtn{
+    width:100%;
+}
+#rentMessage{
+    display:none;
+}
+.manufactures, .orders, .models{
+    display:none;
+}
+.manage .wheel-start3-body h2{
+    width:100%;
+}
+.manage .wheel-start3-body aside{
+    width:20%;
+    margin-top:20px;
+    float:left;
+}
+.manage .wheel-start3-body table{
+    width:80%;
+    float:right;
+}
+.manage .wheel-start3-body aside ul li{
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+}
