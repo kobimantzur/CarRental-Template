@@ -13,16 +13,17 @@ namespace CarRental
         {
             this.Configuration.LazyLoadingEnabled = false;
         }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            Database.SetInitializer<CarRentalContext>(null);
-            base.OnModelCreating(modelBuilder);
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    Database.SetInitializer<CarRentalContext>(null);
+        //    base.OnModelCreating(modelBuilder);
+        //}
         public DbSet<Manufacture> Manufacture { get; set; }
 
         public DbSet<Model> Model { get; set; }
         public DbSet<Rental> Rental { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Dealership> Dealership { get; set; }
 
     }
 }

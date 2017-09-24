@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Add Dealership";
+}
+
+<div class="wheel-register-block">
+    <img src="images/bg1.jpg" alt="" class="wheel-img">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7 padd-r0">
+                <div class="wheel-register-sign marg-lg-t150 marg-lg-b150 marg-sm-t100 marg-sm-b100">
+                    <div class="wheel-header">
+                        <h3>Add <span>Dealership</span></h3>
+                    </div>
+                    <form action="/Admin/AddDealership" method="post">
+                        <input type="text" name="name" id="name" placeholder="Name">
+                        <input type="text" name="longitude" id="longitude" placeholder="Longitude">
+                        <input type="text" name="latitude" id="latitude" placeholder="Latitude">
+                        <button class="wheel-btn">Add</button>
+                    </form>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

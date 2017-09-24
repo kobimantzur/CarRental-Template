@@ -7,18 +7,13 @@ using System.Web;
 
 namespace CarRental.Models
 {
-    public class Rental
+    public class Dealership 
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Name { get; set; }
-        public int CarID { get; set; }
-        public DateTime PickupDate { get; set; }
-        public DateTime ReturnDate { get; set; }
-        public string Color { get; set; }
-        public int DriverAge { get; set; }
-        public int UserID { get; set; }
-
+        public float Longitude { get; set; }
+        public float Latitude { get; set; }
     }
 }

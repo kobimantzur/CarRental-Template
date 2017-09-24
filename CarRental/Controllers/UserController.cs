@@ -29,6 +29,7 @@ namespace CarRental.Controllers
             r.ReturnDate = DateTime.ParseExact(Request.Form["returnDate"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             r.CarID = int.Parse(Request.Form["CarID"]);
             r.DriverAge = 21;
+            r.UserID = int.Parse(Request.Form["UserID"]);
             dbContext.Rental.Add(r);
             dbContext.SaveChanges();
             return Content("success", "application/json");

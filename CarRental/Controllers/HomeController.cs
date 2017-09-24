@@ -1,5 +1,6 @@
 ﻿using CarRental.Models;
 using CarRental.ViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -77,6 +78,13 @@ namespace CarRental.Controllers
                 (x, y) => new AllViewModel(x, y.FirstOrDefault()));
 
             return View(vmList.ToList<AllViewModel>());
+        }
+
+        public ActionResult VisitUs()
+        {
+            List<Dealership> dealershipsList = dbContext.Dealership.ToList();
+            ViewBag.DealershipsList = JsonConvert.SerializeObject(dealershipsList);
+            return View();
         }
 
     }

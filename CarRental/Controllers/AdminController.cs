@@ -39,6 +39,28 @@ namespace CarRental.Controllers
             }
             return View();
         }
+
+        public ActionResult AddDealership()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddDealership(Dealership b)
+        {
+            try
+            {
+                Dealership temp = dbContext.Dealership.Where(x => x.Name.Contains(b.Name)).FirstOrDefault();
+              if (temp == null) { 
+                    dbContext.Dealership.Add(b);
+                    dbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
         public ActionResult AddModel()
         {
             List<Manufacture> manufacturesList = new List<Manufacture>();
@@ -78,7 +100,21 @@ namespace CarRental.Controllers
         }
         public ActionResult Statistics()
         {
-
+            var ordersList = dbContext.Rental
+                .GroupBy(x => x.CarID)
+                .Select(grp => new {
+                CarID = grp.FirstOrDefault().CarID,
+                OrderCount = grp.Count()
+             
+            }).ToList();
+            ViewBag.OrdersList = JsonConvert.SerializeObject(ordersList);
+            var orders = dbContext.Rental.GroupBy(x => x.UserID).Select(grp => new
+            {
+                ID = grp.FirstOrDefault().UserID,
+                Count = grp.Count()
+            });
+            var rentalsWithUsers = orders.GroupJoin(dbContext.User, x => x.ID, y => y.ID, (a, b) => new { ID = a.ID, FullName = b.FirstOrDefault().FullName, Count = a.Count }).ToList();
+            ViewBag.TopUsers = JsonConvert.SerializeObject(rentalsWithUsers);
             return View();
         }
 

@@ -81,7 +81,7 @@ h5,
 h6,
 span,
 a {
-  font-family: 'Source Sans Pro', sans-serif; }
+  font-family: Raleway; }
 
 p {
   font-family: 'Roboto', sans-serif; }
@@ -632,8 +632,9 @@ h6 {
             border-radius: 30px;
             padding: 4px;
         }
-        .wheel-cheader-but.user h4{
-            display:inline-block;
+        .wheel-cheader-but.user h4 {
+            display: inline-block;
+            text-shadow: 1px 1px #000;
         }
     .wheel-cheader-but:hover {
         background-color: #404040;
@@ -6407,6 +6408,7 @@ h6 {
     width:20%;
     margin-top:20px;
     float:left;
+    column-count:1;
 }
 .manage .wheel-start3-body table{
     width:80%;
@@ -6416,4 +6418,19 @@ h6 {
     color:#fff;
     font-size:18px;
     cursor:pointer;
+}
+@font-face {
+    font-family: 'Raleway';
+    src: url('/assets/fonts/raleway-regular.eot'); /* IE9 Compat Modes */
+    src: url('/assets/fonts/raleway-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('/assets/fonts/raleway-regular.woff') format('woff'), /* Pretty Modern Browsers */
+    url('/assets/fonts/raleway-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('/assets/fonts/raleway-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+body{
+    font-family: Raleway;
+}
+#map {
+    height: 400px;
+    width: 100%;
 }

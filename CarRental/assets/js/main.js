@@ -15,6 +15,9 @@ $(document).ready(function () {
             }
         }
     }
+    if ($(".manufactures").length > 0) {
+        manageContext(1);
+    }
 });
 if (!fbUserData) {
     setLoginStatus(false);
@@ -82,32 +85,44 @@ function rent(carId) {
     else {
         var returnDate = getParameterByName("returnDate");
         $.ajax({
-            type: "POST",
-            url: "/User/Rent",
+            type: "GET",
+            url: "/User/GetLoggedUser",
             data: {
-                pickupDate: getParameterByName("pickupDate"),
-                returnDate: getParameterByName("returnDate"),
-                userId: fbUserData.id,
-                carId: carId
+                userId: fbUserData.id
             },
             dataType: "text",
             success: function (data) {
-                if (data == "success") {
-                    $("#rentBtn").hide();
-                    $("#rentMessage").show();
-                    $("#rentModal").modal();
-                    rentedCars = sessionStorage.getItem("rentedCars");
-                    if (!rentedCars) {
-                        rentedCars = [];
-                        rentedCars.push($("#carId").val());
+                var user = JSON.parse(data);
+                $.ajax({
+                    type: "POST",
+                    url: "/User/Rent",
+                    data: {
+                        pickupDate: getParameterByName("pickupDate"),
+                        returnDate: getParameterByName("returnDate"),
+                        userId: user.ID,
+                        carId: carId
+                    },
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "success") {
+                            $("#rentBtn").hide();
+                            $("#rentMessage").show();
+                            $("#rentModal").modal();
+                            rentedCars = sessionStorage.getItem("rentedCars");
+                            if (!rentedCars) {
+                                rentedCars = [];
+                                rentedCars.push($("#carId").val());
+                            }
+                            else {
+                                rentedCars.push($("#carId").val());
+                            }
+                            sessionStorage.setItem("rentedCars", $("#carId").val());
+                        }
                     }
-                    else {
-                        rentedCars.push($("#carId").val());
-                    }
-                    sessionStorage.setItem("rentedCars", $("#carId").val());
-                }
+                });
             }
         });
+
     }
 }
 

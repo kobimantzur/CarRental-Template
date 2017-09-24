@@ -155,11 +155,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AllViewModel.cs" />
+    <Compile Include="Models\Dealership.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Manufacture.cs" />
     <Compile Include="Models\Rental.cs" />
     <Compile Include="Models\Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\OrderViewModel.cs" />
     <Compile Include="ViewModels\RentalViewModel.cs" />
     <Compile Include="ViewModels\HomePageViewModel.cs" />
     <Compile Include="ViewModels\EditModelViewModel.cs" />
@@ -174,10 +176,12 @@
     <Content Include="assets\css\jquery.datetimepicker.min.css" />
     <Content Include="assets\css\loaders.min.css" />
     <Content Include="assets\css\media.css" />
+    <Content Include="assets\fonts\raleway-regular.svg" />
     <Content Include="assets\js\bootstrap-datepicker.js" />
     <Content Include="assets\js\bootstrap-select.min.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <Content Include="assets\js\equalHeightsPlugin.js" />
+    <Content Include="assets\js\graphs.js" />
     <Content Include="assets\js\html5shiv.min.js" />
     <Content Include="assets\js\idangerous.swiper.min.js" />
     <Content Include="assets\js\index.js" />
@@ -187,6 +191,7 @@
     <Content Include="assets\js\jquery.dlmenu.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\respond.min.js" />
+    <Content Include="assets\vid\tips.mp4" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -306,6 +311,9 @@
     <Content Include="assets\css\index.scss" />
     <Content Include="assets\css\_media2.scss" />
     <Content Include="assets\css\_style2.scss" />
+    <Content Include="assets\fonts\raleway-regular.eot" />
+    <Content Include="assets\fonts\raleway-regular.ttf" />
+    <Content Include="assets\fonts\raleway-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -337,10 +345,11 @@
     <Content Include="Views\Home\ViewDetails.cshtml" />
     <Content Include="Views\Home\SearchResults.cshtml" />
     <Content Include="Views\Admin\EditModel.cshtml" />
+    <Content Include="Views\Admin\AddDealership.cshtml" />
+    <Content Include="Views\Home\VisitUs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="assets\vid\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
