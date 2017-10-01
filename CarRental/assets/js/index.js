@@ -654,6 +654,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     if ($(".edit-btn").length > 0) {
         $(".edit-btn").on("click", function () {
+            debugger;
             if ($(this).hasClass("edit")) {
                 $(this).removeClass("edit");
                 var id = $(this).parent().prev().prev()[0].innerHTML;

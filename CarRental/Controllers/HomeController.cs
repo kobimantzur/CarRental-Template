@@ -30,7 +30,7 @@ namespace CarRental.Controllers
                 modelsList = dbContext.Model.ToList();
                 var vmList = modelsList.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
                 manufacture => manufacture.ID,
-                (x, y) => new AllViewModel(x, y.FirstOrDefault()));
+                (x, y) => new CarViewModel(x, y.FirstOrDefault()));
               
                 return View(vmList);
             }
@@ -45,7 +45,7 @@ namespace CarRental.Controllers
         {
             try {
                 Model model = dbContext.Model.Where(x => x.ID == ID).FirstOrDefault();
-                AllViewModel vm = new AllViewModel();
+                CarViewModel vm = new CarViewModel();
                 vm.ID = model.ID;
                 vm.Name = model.Name;
                 vm.isAvailable = model.isAvailable;
@@ -75,9 +75,9 @@ namespace CarRental.Controllers
             }
             var vmList = models.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
                 manufacture => manufacture.ID,
-                (x, y) => new AllViewModel(x, y.FirstOrDefault()));
+                (x, y) => new CarViewModel(x, y.FirstOrDefault()));
 
-            return View(vmList.ToList<AllViewModel>());
+            return View(vmList.ToList<CarViewModel>());
         }
 
         public ActionResult VisitUs()

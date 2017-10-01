@@ -7,7 +7,7 @@ using System.Web;
 
 namespace CarRental.Models
 {
-    public class AllViewModel
+    public class CarViewModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -18,11 +18,11 @@ namespace CarRental.Models
         public string Color { get; set; }
         public int PricePerDay { get; set; }
         public bool isAvailable { get; set; }
-        public AllViewModel()
+        public CarViewModel()
         {
 
         }
-        public AllViewModel(Model m1,Manufacture m2)
+        public CarViewModel(Model m1,Manufacture m2)
         {
             this.ID = m1.ID;
             this.Name = m1.Name;

@@ -76,14 +76,10 @@ function getParameterByName(name, url) {
 }
 
 function rent(carId) {
-    if (!carId) {
-        carId = $("#carId").val();
-    }
     if (!fbUserData) {
         alert("You must login in order to rent a car");
     }
     else {
-        var returnDate = getParameterByName("returnDate");
         $.ajax({
             type: "GET",
             url: "/User/GetLoggedUser",
@@ -116,7 +112,7 @@ function rent(carId) {
                             else {
                                 rentedCars.push($("#carId").val());
                             }
-                            sessionStorage.setItem("rentedCars", $("#carId").val());
+                            sessionStorage.setItem("rentedCars",JSON.parse(rentedCars));
                         }
                     }
                 });

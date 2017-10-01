@@ -61,6 +61,7 @@ namespace CarRental.Controllers
             }
             return View();
         }
+        [HttpGet]
         public ActionResult AddModel()
         {
             List<Manufacture> manufacturesList = new List<Manufacture>();
@@ -83,6 +84,7 @@ namespace CarRental.Controllers
             {
                 RedirectToAction("Index", "Home");
             }
+            
             return View();
         }
         public ActionResult Manage()

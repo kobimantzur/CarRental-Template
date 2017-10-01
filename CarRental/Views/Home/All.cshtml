@@ -1,5 +1,5 @@
 ﻿@using CarRental.Models
-@model IEnumerable<AllViewModel>
+@model IEnumerable<CarViewModel>
 <div class="wheel-start3">
     <img src="images/bg7.jpg" alt="" class="wheel-img">
     <div class="container">
@@ -22,7 +22,7 @@
         <div class="product-list product-list2 wheel-bgt clearfix">
             <div class="row">
                 @if (Model != null) { 
-                foreach (AllViewModel m in Model)
+                foreach (CarViewModel m in Model)
                 {
                     <div class="col-xs-12">
                         <div class="product-elem-style1 product-elem-style  wheel-bg1 clearfix">
