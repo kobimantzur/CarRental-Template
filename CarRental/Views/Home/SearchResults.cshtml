@@ -22,6 +22,10 @@
                 {
                     <div class="col-xs-12">
                         <div class="product-elem-style1 product-elem-style  wheel-bg1 clearfix">
+                            @if (m.isRecommendedCar)
+                            {
+                                <h4 class="recommended">Great Deal!</h4>
+                            }
                             <div class="product-table2">
                                 <div class="img-wrap img-wrap2 product-cell">
                                     <img src="@m.Image" alt="img" class="img-responsive">

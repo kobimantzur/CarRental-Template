@@ -18,6 +18,7 @@ namespace CarRental.Models
         public string Color { get; set; }
         public int PricePerDay { get; set; }
         public bool isAvailable { get; set; }
+        public bool isRecommendedCar { get; set; }
         public CarViewModel()
         {
 

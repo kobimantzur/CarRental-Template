@@ -6434,3 +6434,12 @@ body{
     height: 400px;
     width: 100%;
 }
+.recommended {
+    background: #6eca6e;
+    width: auto;
+    width: 172px;
+    text-align: Center;
+    padding: 6px;
+    border-bottom-right-radius: 5px;
+    font-size: 22px;
+}

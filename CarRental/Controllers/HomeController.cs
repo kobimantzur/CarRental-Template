@@ -1,4 +1,6 @@
-﻿using CarRental.Models;
+﻿using Accord.MachineLearning.VectorMachines.Learning;
+using Accord.Statistics.Kernels;
+using CarRental.Models;
 using CarRental.ViewModels;
 using Newtonsoft.Json;
 using System;
@@ -31,7 +33,7 @@ namespace CarRental.Controllers
                 var vmList = modelsList.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
                 manufacture => manufacture.ID,
                 (x, y) => new CarViewModel(x, y.FirstOrDefault()));
-              
+
                 return View(vmList);
             }
             catch (Exception ex)
@@ -43,7 +45,8 @@ namespace CarRental.Controllers
 
         public ActionResult ViewDetails(int ID)
         {
-            try {
+            try
+            {
                 Model model = dbContext.Model.Where(x => x.ID == ID).FirstOrDefault();
                 CarViewModel vm = new CarViewModel();
                 vm.ID = model.ID;
@@ -63,12 +66,12 @@ namespace CarRental.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult SearchResults(string PickupDate, string ReturnDate,int ManufactureId = -1)
+        public ActionResult SearchResults(string PickupDate, string ReturnDate, int ManufactureId = -1)
         {
             DateTime parsedPickupDate = DateTime.ParseExact(PickupDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DateTime parsedReturnDate = DateTime.ParseExact(ReturnDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             var models = new List<Model>();
-            models = dbContext.Model.Where(x => (dbContext.Rental.Where(y=> y.CarID == x.ID && (parsedPickupDate >= y.PickupDate && parsedReturnDate <= y.ReturnDate )).ToList().Count == 0)).ToList();
+            models = dbContext.Model.Where(x => (dbContext.Rental.Where(y => y.CarID == x.ID && (parsedPickupDate >= y.PickupDate && parsedReturnDate <= y.ReturnDate)).ToList().Count == 0)).ToList();
             if (ManufactureId != -1)
             {
                 models = models.Where(x => x.ManufactureId == ManufactureId).ToList();
@@ -76,8 +79,8 @@ namespace CarRental.Controllers
             var vmList = models.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
                 manufacture => manufacture.ID,
                 (x, y) => new CarViewModel(x, y.FirstOrDefault()));
-
-            return View(vmList.ToList<CarViewModel>());
+            vmList = CalcMostRecommendedCars(vmList.ToList());
+            return View(vmList);
         }
 
         public ActionResult VisitUs()
@@ -85,6 +88,42 @@ namespace CarRental.Controllers
             List<Dealership> dealershipsList = dbContext.Dealership.ToList();
             ViewBag.DealershipsList = JsonConvert.SerializeObject(dealershipsList);
             return View();
+        }
+
+        public List<CarViewModel> CalcMostRecommendedCars(List<CarViewModel> models)
+        {
+            List<Model> modelsList = dbContext.Model.ToList();
+            double[][] inputs =
+  {
+                /* 1.*/ new double[] { 250, 2017 },
+                /* 2.*/ new double[] { 300, 2015 }, 
+                /* 3.*/ new double[] { 200, 2016 }, 
+                /* 4.*/ new double[] { 100, 2016 },
+            };
+
+            int[] outputs =
+            { 
+                /* 1. 0 xor 0 = 0: */ 1,
+                /* 2. 1 xor 0 = 1: */ 0,
+                /* 3. 0 xor 1 = 1: */ 0,
+                /* 4. 1 xor 1 = 0: */ 1,
+            };
+
+            // Create the learning algorithm with the chosen kernel
+            var smo = new SequentialMinimalOptimization<Gaussian>()
+            {
+                Complexity = 100 // Create a hard-margin SVM 
+            };
+
+            // Use the algorithm to learn the svm
+            var svm = smo.Learn(inputs, outputs);
+            // Compute the machine's answers for the given inputs
+            foreach (CarViewModel item in models)
+            {
+                double[] data = { item.PricePerDay, item.Year };
+                item.isRecommendedCar = svm.Decide(data);
+            }
+            return models;
         }
 
     }
