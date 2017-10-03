@@ -1,6 +1,7 @@
 ﻿var fbUserData, providerValidation, loginTries;
 var rentedCars;
-
+var baseCurrency = "USD";
+var currencyList = [];
 $(document).ready(function () {
     if ($("#rentBtn").length > 0) {
         rentedCars = sessionStorage.getItem("rentedCars");
@@ -17,6 +18,12 @@ $(document).ready(function () {
     }
     if ($(".manufactures").length > 0) {
         manageContext(1);
+    }
+    if ($(".search-results").length > 0) {
+        getCurrency();
+    }
+    if ($(".price").length > 0) {
+        $("#currPrice").show();
     }
 });
 if (!fbUserData) {
@@ -147,4 +154,45 @@ function manageContext(id) {
             $(".orders").show();
             break;
     }
+}
+
+function getCurrency(currency) {
+
+    if (currency) {
+        baseCurrency = currency;
+        $("#currPrice").text(currency);
+        $(".price").each(function (i, obj) {
+            var oldPricePerDay = parseInt(obj.innerText) * currencyList[currency];
+            oldPricePerDay = Math.round(oldPricePerDay).toFixed(2)
+            obj.innerText = oldPricePerDay;
+
+        });
+        $(".price-wrap small").text(currency);
+        
+    }
+    $.ajax({
+        type: "GET",
+        url: "http://api.fixer.io/latest?base=" + baseCurrency,
+        dataType: "text",
+        success: function (data) {
+            //Get the updated currency list
+            currencyList = JSON.parse(data).rates;
+            $("#currencyItems").empty();
+            for (var property in currencyList) {
+                if (currencyList.hasOwnProperty(property)) {
+                    var currencyOption = "<li><a href='#' onclick=getCurrency('" + property + "')>" + property + "</a></li>";
+                    $("#currencyItems").append(currencyOption);
+                }
+            }
+        }
+    });
+}
+
+function shareCarOnFacebook(id) {
+    FB.ui({
+        method: 'feed',
+        link: "https://google.com",
+        //link: window.location.origin + "/Home/ViewDetails?ID=" + id,
+        caption: 'An example caption',
+    }, function (response) { });
 }

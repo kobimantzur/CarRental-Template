@@ -19,10 +19,10 @@
 -------------------------------------------------------------------*/
 
 ;
-(function($, window, document, undefined) {
+(function ($, window, document, undefined) {
     "use strict";
 
-// time picker
+    // time picker
 
     if ($('.timepicker').length) {
         $('.timepicker').datetimepicker({
@@ -36,7 +36,7 @@
         $.datetimepicker.setLocale('en');
 
         //$('.datetimepicker').datetimepicker({
-           
+
         //    timepicker: false,
 
         //    format: 'dd-mm-yyyy'
@@ -46,12 +46,12 @@
 
     function search() {
     }
-$('.wheel-table-cart .fa-times').on('click', function (e) {
-   $(this).parent().parent().remove();
-});
+    $('.wheel-table-cart .fa-times').on('click', function (e) {
+        $(this).parent().parent().remove();
+    });
 
     // car list style
-    $('.wheel-car-list-btn a').on('click', function(event) {
+    $('.wheel-car-list-btn a').on('click', function (event) {
         event.preventDefault();
         var that = $(this),
             newStyle = $('.product-elem-style'),
@@ -80,16 +80,16 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     // reservation links
 
-    $('.reservation .wheel-start-form label.promo button').on('click', function(event) {
+    $('.reservation .wheel-start-form label.promo button').on('click', function (event) {
         event.preventDefault();
         window.location.href = "reservation2.html";
     });
 
-    $('.product-list .wheel-btn').on('click', function(event) {
+    $('.product-list .wheel-btn').on('click', function (event) {
         event.preventDefault();
         window.location.href = "reservation3.html";
     });
-    $('.product-wrap .wheel-btn.style-2').on('click', function(event) {
+    $('.product-wrap .wheel-btn.style-2').on('click', function (event) {
         event.preventDefault();
         window.location.href = "reservation4.html";
     });
@@ -102,12 +102,12 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     // castum  selectop for price
 
-    $('.select.select-1 span').on('click', function() {
+    $('.select.select-1 span').on('click', function () {
         $(this).siblings('.list').toggle();
         $(this).toggleClass('active');
     });
 
-    $('.select.select-1 .list li').on('click', function() {
+    $('.select.select-1 .list li').on('click', function () {
         var tx = $(this).text();
         $('.select.select-1 span').text(tx);
         $(this).parents('.list').toggle();
@@ -116,12 +116,12 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
 
 
-    $('.select.select-2 span').on('click', function() {
+    $('.select.select-2 span').on('click', function () {
         $(this).siblings('.list').toggle();
         $(this).toggleClass('active');
     });
 
-    $('.select.select-2 .list li').on('click', function() {
+    $('.select.select-2 .list li').on('click', function () {
         var tx = $(this).text();
         $('.select.select-2 span').text(tx);
         $(this).parents('.list').toggle();
@@ -129,12 +129,12 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     });
 
 
-    $('.select.select-3 span').on('click', function() {
+    $('.select.select-3 span').on('click', function () {
         $(this).siblings('.list').toggle();
         $(this).toggleClass('active');
     });
 
-    $('.select.select-3 .list li').on('click', function() {
+    $('.select.select-3 .list li').on('click', function () {
         var tx = $(this).text();
         $('.select.select-3 span').text(tx);
         $(this).parents('.list').toggle();
@@ -142,12 +142,12 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     });
 
 
-    $('.select.select-4 span').on('click', function() {
+    $('.select.select-4 span').on('click', function () {
         $(this).siblings('.list').toggle();
         $(this).toggleClass('active');
     });
 
-    $('.select.select-4 .list li').on('click', function() {
+    $('.select.select-4 .list li').on('click', function () {
         var tx = $(this).text();
         $('.select.select-4 span').text(tx);
         $(this).parents('.list').toggle();
@@ -157,19 +157,19 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
 
     // accordion
-    var wpcRemoveClass = function(el, _class) {
+    var wpcRemoveClass = function (el, _class) {
         if (el.classList)
             el.classList.remove(_class ? _class : 'active');
         else
             el.className = panel.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
     }
-    $('.wpc-accordion').on('click', '.panel-title', function() {
+    $('.wpc-accordion').on('click', '.panel-title', function () {
 
         var panel_parent = this.parentNode,
             panel_container = panel_parent.parentNode,
             panels_wrap = panel_container.querySelectorAll('.panel-wrap');
 
-        Array.prototype.forEach.call(panels_wrap, function(panel, i) {
+        Array.prototype.forEach.call(panels_wrap, function (panel, i) {
             if (panel !== panel_parent) {
                 wpcRemoveClass(panel);
             }
@@ -202,7 +202,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     }
 
     // home active care
-    $('.wheel-collection').on('click', '.wheel-collection-item', function() {
+    $('.wheel-collection').on('click', '.wheel-collection-item', function () {
 
         var activeCar = $('.wheel-collection-text'),
             activeCarImg = $('.wheel-collection-img  .car-img'),
@@ -238,7 +238,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
 
     // tabs
-    $('.tabs-header').on('click', 'li:not(.active)', function() {
+    $('.tabs-header').on('click', 'li:not(.active)', function () {
 
         var index_el = $(this).index();
 
@@ -251,7 +251,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     });
 
-    $('  .tabs-header li a ').on('click', function(e) {
+    $('  .tabs-header li a ').on('click', function (e) {
         e.preventDefault();
     });
 
@@ -282,7 +282,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     /* 04 - FUNCTION ON PAGE LOAD */
     /*============================*/
 
-    $(window).load(function() {
+    $(window).load(function () {
         initSwiper();
 
         $('.load-wrap').hide();
@@ -294,7 +294,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     /*==============================*/
     function resizeCall() {
         pageCalculations();
-        $('.swiper-container.initialized[data-slides-per-view="responsive"]').each(function() {
+        $('.swiper-container.initialized[data-slides-per-view="responsive"]').each(function () {
             var thisSwiper = swipers['swiper-' + $(this).attr('id')],
                 $t = $(this),
                 slidesPerViewVar = updateSlidesPerView($t),
@@ -311,11 +311,11 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
         });
     }
     if (!_ismobile) {
-        $(window).resize(function() {
+        $(window).resize(function () {
             resizeCall();
         });
     } else {
-        window.addEventListener("orientationchange", function() {
+        window.addEventListener("orientationchange", function () {
             resizeCall();
         }, false);
     }
@@ -326,7 +326,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     function initSwiper() {
         var initIterator = 0;
-        $('.swiper-container').each(function() {
+        $('.swiper-container').each(function () {
             var $t = $(this);
 
             var index = 'swiper-unique-id-' + initIterator;
@@ -357,18 +357,18 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
                 roundLengths: true,
                 centeredSlides: centerVar,
                 mode: mode || 'horizontal',
-                onInit: function(swiper) {
+                onInit: function (swiper) {
                     $t.find('.swiper-slide').addClass('active');
 
                     sliderOpacity();
                 },
-                onSwiperCreated: function() {
+                onSwiperCreated: function () {
 
                 },
-                onSlideChangeEnd: function(swiper) {
+                onSlideChangeEnd: function (swiper) {
                     var activeIndex = (loopVar === 1) ? swiper.activeLoopIndex : swiper.activeIndex;
                 },
-                onSlideChangeStart: function(swiper) {
+                onSlideChangeStart: function (swiper) {
                     $t.find('.swiper-slide.active').removeClass('active');
                 }
             });
@@ -412,21 +412,21 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     }
 
     //swiper arrows
-    $('.swiper-arrow-left').on('click', function() {
+    $('.swiper-arrow-left').on('click', function () {
         swipers['swiper-' + $(this).parent().attr('id')].swipePrev();
         sliderOpacity()
     });
 
-    $('.swiper-arrow-right').on('click', function() {
+    $('.swiper-arrow-right').on('click', function () {
         swipers['swiper-' + $(this).parent().attr('id')].swipeNext();
         sliderOpacity()
     });
 
-    $('.swiper-outer-left').on('click', function() {
+    $('.swiper-outer-left').on('click', function () {
         swipers['swiper-' + $(this).parent().find('.swiper-container').attr('id')].swipePrev();
     });
 
-    $('.swiper-outer-right').on('click', function() {
+    $('.swiper-outer-right').on('click', function () {
         swipers['swiper-' + $(this).parent().find('.swiper-container').attr('id')].swipeNext();
     });
 
@@ -436,7 +436,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     var $first_child_link = $('.menu-item-has-children > a').append('<span class="fa fa-angle-right "></span>');
 
-    $('.nav-menu-icon').on('click', function(e) {
+    $('.nav-menu-icon').on('click', function (e) {
         $(this).toggleClass('active');
         $('.wheel-navigation').toggleClass('active');
         $('html').toggleClass('overflow-html');
@@ -445,7 +445,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     });
 
 
-    $first_child_link.find('span').on('click', function(e) {
+    $first_child_link.find('span').on('click', function (e) {
         e.preventDefault();
         var self = $(this),
             parentLi = self.parent();
@@ -461,7 +461,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     if ($(window).width() >= 993) {
 
-        $(".wheel-nav-menu-icon").on('click', function() {
+        $(".wheel-nav-menu-icon").on('click', function () {
 
             var wpc_header = $('.wheel-header');
 
@@ -472,7 +472,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
             } else {
                 wpc_header.find("nav").addClass('slide-active');
                 wpc_header.addClass('header-animate');
-                setTimeout(function() {
+                setTimeout(function () {
                     $('.wheel-navigation').css('overflow', 'visible');
                 }, 500);
             }
@@ -482,8 +482,8 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     }
 
-    var counters = function() {
-        $('.wheel-testimonial-item span ').not('.animated').each(function() {
+    var counters = function () {
+        $('.wheel-testimonial-item span ').not('.animated').each(function () {
             if ($(window).scrollTop() >= $(this).offset().top - $(window).height() * 0.7) {
                 $(this).addClass('animated').countTo();
             }
@@ -492,7 +492,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
         var elemSize = $('.wheel-interest ');
         if (elemSize.length) {
             if ($(window).scrollTop() >= elemSize.offset().top - $(window).height() * 0.7) {
-                elemSize.each(function(index, el) {
+                elemSize.each(function (index, el) {
                     elemSize.eq(index).width($(this).attr('data-size') + '%')
                 });
 
@@ -510,7 +510,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
         }
         var $parent, _this;
 
-        $(img_sel).each(function() {
+        $(img_sel).each(function () {
             _this = $(this);
             $parent = _this.closest(parent_sel);
             $parent = $parent.length ? $parent : _this.parent();
@@ -535,7 +535,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
         }
         var $parent, _this;
 
-        $(img_sel).each(function() {
+        $(img_sel).each(function () {
             _this = $(this);
             $parent = _this.closest(parent_sel);
             $parent = $parent.length ? $parent : _this.parent();
@@ -558,7 +558,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     /*============================*/
 
     if ($('.wheel-map').length) {
-        $('.wheel-map').each(function() {
+        $('.wheel-map').each(function () {
             initialize(this);
         });
     }
@@ -617,7 +617,7 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
             icon: image
         });
 
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(marker, 'click', function () {
             infowindow.open(map, marker);
         });
 
@@ -632,13 +632,13 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
     /* LOAD RESIZE               */
     /*============================*/
 
-    $(window).on('scroll', function() {
+    $(window).on('scroll', function () {
         counters();
         undateMenu();
 
     })
 
-    $(window).on('load resize', function() {
+    $(window).on('load resize', function () {
 
         // add  identical height  to block
         $('.car-item-wrap').css('height', 'auto').equalHeights();
@@ -654,7 +654,6 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
 
     if ($(".edit-btn").length > 0) {
         $(".edit-btn").on("click", function () {
-            debugger;
             if ($(this).hasClass("edit")) {
                 $(this).removeClass("edit");
                 var id = $(this).parent().prev().prev()[0].innerHTML;
@@ -672,11 +671,11 @@ $('.wheel-table-cart .fa-times').on('click', function (e) {
             }
         });
     }
-
-    $('.date').datepicker({
-        format: 'dd/mm/yyyy',
-        autoclose: true
-    });
-
+    if ($(".date").length > 0) {
+        $('.date').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        });
+    }
 
 })(jQuery, window, document);

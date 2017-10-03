@@ -6443,3 +6443,12 @@ body{
     border-bottom-right-radius: 5px;
     font-size: 22px;
 }
+#currencyItems{
+    overflow-y:scroll;
+}
+.wheel-menu-wrap.active-scroll .wheel-top-menu{
+    display:block;
+}
+#currPrice {
+    display:none;
+}
