@@ -44,11 +44,13 @@ namespace CarRental.Controllers
         {
             return View();
         }
+        //Add the new dealership to database
         [HttpPost]
         public ActionResult AddDealership(Dealership b)
         {
             try
             {
+                //First - check if the dealership's name exists - if it does we do not add it again
                 Dealership temp = dbContext.Dealership.Where(x => x.Name.Contains(b.Name)).FirstOrDefault();
               if (temp == null) { 
                     dbContext.Dealership.Add(b);

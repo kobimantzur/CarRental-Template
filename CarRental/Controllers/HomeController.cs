@@ -33,7 +33,7 @@ namespace CarRental.Controllers
                 var vmList = modelsList.GroupJoin(dbContext.Manufacture, model => model.ManufactureId,
                 manufacture => manufacture.ID,
                 (x, y) => new CarViewModel(x, y.FirstOrDefault()));
-
+                vmList = CalcMostRecommendedCars(vmList.ToList());
                 return View(vmList);
             }
             catch (Exception ex)
@@ -90,34 +90,31 @@ namespace CarRental.Controllers
             return View();
         }
 
-        public List<CarViewModel> CalcMostRecommendedCars(List<CarViewModel> models)
+        private List<CarViewModel> CalcMostRecommendedCars(List<CarViewModel> models)
         {
             List<Model> modelsList = dbContext.Model.ToList();
             double[][] inputs =
   {
-                /* 1.*/ new double[] { 250, 2017 },
-                /* 2.*/ new double[] { 300, 2015 }, 
-                /* 3.*/ new double[] { 200, 2016 }, 
-                /* 4.*/ new double[] { 100, 2016 },
+                 new double[] { 250, 2017 },
+                 new double[] { 300, 2015 }, 
+                 new double[] { 200, 2016 }, 
+                 new double[] { 100, 2016 },
             };
 
             int[] outputs =
             { 
-                /* 1. 0 xor 0 = 0: */ 1,
-                /* 2. 1 xor 0 = 1: */ 0,
-                /* 3. 0 xor 1 = 1: */ 0,
-                /* 4. 1 xor 1 = 0: */ 1,
+                 1,
+                 0,
+                 0,
+                 1,
             };
 
-            // Create the learning algorithm with the chosen kernel
             var smo = new SequentialMinimalOptimization<Gaussian>()
             {
-                Complexity = 100 // Create a hard-margin SVM 
+                Complexity = 100  
             };
 
-            // Use the algorithm to learn the svm
             var svm = smo.Learn(inputs, outputs);
-            // Compute the machine's answers for the given inputs
             foreach (CarViewModel item in models)
             {
                 double[] data = { item.PricePerDay, item.Year };

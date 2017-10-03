@@ -12,18 +12,13 @@ namespace CarRental.Controllers
     public class UserController : Controller
     {
         CarRentalContext dbContext = new CarRentalContext();
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-        public ActionResult Create()
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        //Input - pickup&return dates, carid, userId
+        //Output - success or failure
         [HttpPost]
         public ActionResult Rent()
         {
+            string status = String.Empty;
+            try { 
             Rental r = new Rental();
             r.PickupDate = DateTime.ParseExact(Request.Form["pickupDate"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             r.ReturnDate = DateTime.ParseExact(Request.Form["returnDate"], "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -32,9 +27,17 @@ namespace CarRental.Controllers
             r.UserID = int.Parse(Request.Form["UserID"]);
             dbContext.Rental.Add(r);
             dbContext.SaveChanges();
-            return Content("success", "application/json");
-        }
+                status = "success";
+            }
+            catch(Exception ex)
+            {
+                status = "failure";
+            }
+            return Content(status, "application/json");
 
+        }
+        //Input - the facebook App ID
+        //Output - the user object
         [HttpGet]
         public ActionResult GetLoggedUser(string userId)
         {
@@ -42,6 +45,8 @@ namespace CarRental.Controllers
 
             return Content(JsonConvert.SerializeObject(user), "application/json");
         }
+        //Input - the user's facebook app id
+        //Output - the user object
         [HttpPost]
         public ActionResult Login()
         {

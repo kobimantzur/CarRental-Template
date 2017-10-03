@@ -155,7 +155,7 @@ function manageContext(id) {
             break;
     }
 }
-
+//Calculate the price based on the requested currency and perform a GET request to receive the list of new currencies
 function getCurrency(currency) {
 
     if (currency) {
@@ -188,11 +188,9 @@ function getCurrency(currency) {
     });
 }
 
-function shareCarOnFacebook(id) {
-    FB.ui({
-        method: 'feed',
-        link: "https://google.com",
-        //link: window.location.origin + "/Home/ViewDetails?ID=" + id,
-        caption: 'An example caption',
-    }, function (response) { });
+function shareCarOnFacebook() {
+    FB.login(function () {
+        // Note: The call will only work if you accept the permission request
+        FB.api('/me/feed', 'post', { message: 'Check out wheel car agency!! ' });
+    }, { scope: 'publish_actions' });
 }
